@@ -13,10 +13,23 @@ class CsvReaderServiceTest extends TestCase
     private CsvReaderService $service;
     private string $tempDir;
 
+    /** @var string[] */
+    private array $tempFiles = [];
+
     protected function setUp(): void
     {
         $this->service = new CsvReaderService();
         $this->tempDir = sys_get_temp_dir();
+    }
+
+    protected function tearDown(): void
+    {
+        foreach ($this->tempFiles as $file) {
+            if (file_exists($file)) {
+                unlink($file);
+            }
+        }
+        $this->tempFiles = [];
     }
 
     public function testReadsHeadersAndRowsCorrectly(): void
@@ -32,7 +45,7 @@ class CsvReaderServiceTest extends TestCase
         $this->assertSame(['Name', 'Age', 'Salary'], $result['headers']);
         $this->assertCount(2, $result['rows']);
         $this->assertSame(['Name' => 'Alice', 'Age' => '29', 'Salary' => '55000.50'], $result['rows'][0]);
-        $this->assertSame(['Name' => 'Bob', 'Age' => '34', 'Salary' => '62000'], $result['rows'][1]);
+        $this->assertSame(['Name' => 'Bob',   'Age' => '34', 'Salary' => '62000'],    $result['rows'][1]);
     }
 
     public function testTrimsWhitespaceFromHeadersAndValues(): void
@@ -43,7 +56,7 @@ class CsvReaderServiceTest extends TestCase
 
         $this->assertSame(['Name', 'Age'], $result['headers']);
         $this->assertSame('Alice', $result['rows'][0]['Name']);
-        $this->assertSame('29', $result['rows'][0]['Age']);
+        $this->assertSame('29',    $result['rows'][0]['Age']);
     }
 
     public function testSkipsEmptyLines(): void
@@ -113,18 +126,7 @@ class CsvReaderServiceTest extends TestCase
         $this->assertCount(0, $result['rows']);
     }
 
-    /** @var string[] */
-    private array $tempFiles = [];
-
-    protected function tearDown(): void
-    {
-        foreach ($this->tempFiles as $file) {
-            if (file_exists($file)) {
-                unlink($file);
-            }
-        }
-        $this->tempFiles = [];
-    }
+    // -------------------------------------------------------------------------
 
     private function createCsvFile(string $content): string
     {

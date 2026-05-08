@@ -7,8 +7,6 @@ namespace App\Service;
 use RuntimeException;
 
 /**
- * Responsible for reading and parsing a CSV file.
- *
  * TODO: Add support for different delimiters (tab, pipe, semicolon) via config option.
  * TODO: Add support for UTF-8 BOM detection and stripping for Excel-exported CSVs.
  * TODO: For 100k+ row files, consider streaming/chunked reading instead of loading all rows at once.
@@ -56,7 +54,7 @@ class CsvReaderService
      */
     private function readHeaders(mixed $handle): array
     {
-        $headers = fgetcsv($handle);
+        $headers = fgetcsv($handle, escape: '');
 
         if ($headers === false || $headers === null) {
             throw new RuntimeException('CSV file is empty or has no header row.');
@@ -81,10 +79,9 @@ class CsvReaderService
         $rows       = [];
         $lineNumber = 1;
 
-        while (($data = fgetcsv($handle)) !== false) {
+        while (($data = fgetcsv($handle, escape: '')) !== false) {
             $lineNumber++;
 
-            // Skip completely empty lines
             if ($data === [null]) {
                 continue;
             }
