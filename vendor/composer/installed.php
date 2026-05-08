@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'dev/csv-to-sql',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'c76622ccd3bea2474b242d13c5fc6cc7b283d315',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'dev/csv-to-sql' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'c76622ccd3bea2474b242d13c5fc6cc7b283d315',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -6,6 +6,20 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Command\\CsvIndexEsCommand' => $baseDir . '/src/Command/CsvIndexEsCommand.php',
+    'App\\Command\\CsvToSqlCommand' => $baseDir . '/src/Command/CsvToSqlCommand.php',
+    'App\\ElasticSearch\\CsvIndexerService' => $baseDir . '/src/ElasticSearch/CsvIndexerService.php',
+    'App\\ElasticSearch\\HttpClientInterface' => $baseDir . '/src/ElasticSearch/HttpClientInterface.php',
+    'App\\ElasticSearch\\IndexMappingBuilder' => $baseDir . '/src/ElasticSearch/IndexMappingBuilder.php',
+    'App\\ElasticSearch\\NativeHttpClient' => $baseDir . '/src/ElasticSearch/NativeHttpClient.php',
+    'App\\Service\\CsvReaderService' => $baseDir . '/src/Service/CsvReaderService.php',
+    'App\\Service\\SqlGeneratorService' => $baseDir . '/src/Service/SqlGeneratorService.php',
+    'App\\Service\\TypeInferenceService' => $baseDir . '/src/Service/TypeInferenceService.php',
+    'App\\Tests\\Unit\\CsvReaderServiceTest' => $baseDir . '/tests/Unit/CsvReaderServiceTest.php',
+    'App\\Tests\\Unit\\ElasticSearch\\CsvIndexerServiceTest' => $baseDir . '/tests/Unit/ElasticSearch/CsvIndexerServiceTest.php',
+    'App\\Tests\\Unit\\ElasticSearch\\IndexMappingBuilderTest' => $baseDir . '/tests/Unit/ElasticSearch/IndexMappingBuilderTest.php',
+    'App\\Tests\\Unit\\SqlGeneratorServiceTest' => $baseDir . '/tests/Unit/SqlGeneratorServiceTest.php',
+    'App\\Tests\\Unit\\TypeInferenceServiceTest' => $baseDir . '/tests/Unit/TypeInferenceServiceTest.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'DeepCopy\\DeepCopy' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
     'DeepCopy\\Exception\\CloneException' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',

@@ -123,6 +123,20 @@ class ComposerStaticInit8a43ca1e17d6f1647037fdf1e06a7915
     );
 
     public static $classMap = array (
+        'App\\Command\\CsvIndexEsCommand' => __DIR__ . '/../..' . '/src/Command/CsvIndexEsCommand.php',
+        'App\\Command\\CsvToSqlCommand' => __DIR__ . '/../..' . '/src/Command/CsvToSqlCommand.php',
+        'App\\ElasticSearch\\CsvIndexerService' => __DIR__ . '/../..' . '/src/ElasticSearch/CsvIndexerService.php',
+        'App\\ElasticSearch\\HttpClientInterface' => __DIR__ . '/../..' . '/src/ElasticSearch/HttpClientInterface.php',
+        'App\\ElasticSearch\\IndexMappingBuilder' => __DIR__ . '/../..' . '/src/ElasticSearch/IndexMappingBuilder.php',
+        'App\\ElasticSearch\\NativeHttpClient' => __DIR__ . '/../..' . '/src/ElasticSearch/NativeHttpClient.php',
+        'App\\Service\\CsvReaderService' => __DIR__ . '/../..' . '/src/Service/CsvReaderService.php',
+        'App\\Service\\SqlGeneratorService' => __DIR__ . '/../..' . '/src/Service/SqlGeneratorService.php',
+        'App\\Service\\TypeInferenceService' => __DIR__ . '/../..' . '/src/Service/TypeInferenceService.php',
+        'App\\Tests\\Unit\\CsvReaderServiceTest' => __DIR__ . '/../..' . '/tests/Unit/CsvReaderServiceTest.php',
+        'App\\Tests\\Unit\\ElasticSearch\\CsvIndexerServiceTest' => __DIR__ . '/../..' . '/tests/Unit/ElasticSearch/CsvIndexerServiceTest.php',
+        'App\\Tests\\Unit\\ElasticSearch\\IndexMappingBuilderTest' => __DIR__ . '/../..' . '/tests/Unit/ElasticSearch/IndexMappingBuilderTest.php',
+        'App\\Tests\\Unit\\SqlGeneratorServiceTest' => __DIR__ . '/../..' . '/tests/Unit/SqlGeneratorServiceTest.php',
+        'App\\Tests\\Unit\\TypeInferenceServiceTest' => __DIR__ . '/../..' . '/tests/Unit/TypeInferenceServiceTest.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DeepCopy\\DeepCopy' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
         'DeepCopy\\Exception\\CloneException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
