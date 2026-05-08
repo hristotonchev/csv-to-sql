@@ -6,11 +6,12 @@ namespace App\Tests\Unit\ElasticSearch;
 
 use App\ElasticSearch\CsvIndexerService;
 use App\ElasticSearch\HttpClientInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class CsvIndexerServiceTest extends TestCase
 {
-    private HttpClientInterface $httpClient;
+    private HttpClientInterface&MockObject $httpClient;
     private CsvIndexerService $service;
 
     protected function setUp(): void

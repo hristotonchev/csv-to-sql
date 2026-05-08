@@ -53,7 +53,6 @@ class CsvIndexerService
                 'multi_match' => [
                     'query'     => $query,
                     'fields'    => ['name^2', 'grade'],
-                    // Fuzzy matching handles typos — "Alise" matches "Alice"
                     'fuzziness' => 'AUTO',
                 ],
             ],
@@ -94,6 +93,9 @@ class CsvIndexerService
         return $value;
     }
 
+    /**
+     * @param array<string, mixed> $body
+     */
     private function request(string $method, string $endpoint, array $body = []): string
     {
         $url = rtrim($this->elasticsearchUrl, '/') . '/' . ltrim($endpoint, '/');

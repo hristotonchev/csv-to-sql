@@ -16,6 +16,7 @@ class TypeInferenceService
     private const VARCHAR_MAX = 255;
 
     /**
+     * @param string[] $headers
      * @param array<int, array<string, string>> $rows
      * @return array<string, string>
      */
@@ -24,6 +25,7 @@ class TypeInferenceService
         $types = [];
 
         foreach ($headers as $column) {
+            /** @var string[] $values */
             $values = array_column($rows, $column);
             $types[$column] = $this->inferColumnType($values);
         }
@@ -50,7 +52,7 @@ class TypeInferenceService
             return 'INT';
         }
 
-        if ($this->allMatch($nonEmpty, fn($v) => $this->isDecimal($v))) {
+        if ($this->allMatch($nonEmpty, fn($v) => $this->isInteger($v) || $this->isDecimal($v))) {
             return 'DECIMAL(15,2)';
         }
 
@@ -60,8 +62,6 @@ class TypeInferenceService
             return 'TEXT';
         }
 
-        // Round up to the nearest clean boundary so we're not
-        // creating VARCHAR(29) columns that break on slightly longer input.
         return sprintf('VARCHAR(%d)', $this->roundUpLength($maxLength));
     }
 

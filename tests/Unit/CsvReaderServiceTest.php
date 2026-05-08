@@ -126,8 +126,6 @@ class CsvReaderServiceTest extends TestCase
         $this->assertCount(0, $result['rows']);
     }
 
-    // -------------------------------------------------------------------------
-
     private function createCsvFile(string $content): string
     {
         return $this->createTempFile('csv', $content);

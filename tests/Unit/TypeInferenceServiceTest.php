@@ -32,10 +32,9 @@ class TypeInferenceServiceTest extends TestCase
 
     public function testInfersMixedIntAndDecimalAsDecimal(): void
     {
-        // 62000 alone looks like INT but the column has decimals elsewhere
         $result = $this->infer(['Salary'], [['Salary' => '55000.50'], ['Salary' => '62000']]);
 
-        $this->assertSame('VARCHAR(50)', $result['Salary']);
+        $this->assertSame('DECIMAL(15,2)', $result['Salary']);
     }
 
     public function testInfersVarcharWithRoundedBoundary(): void
@@ -70,7 +69,6 @@ class TypeInferenceServiceTest extends TestCase
 
     public function testSkipsEmptyValuesWhenInferring(): void
     {
-        // Empty rows shouldn't poison the INT detection
         $result = $this->infer(['Age'], [['Age' => ''], ['Age' => '29']]);
 
         $this->assertSame('INT', $result['Age']);
@@ -104,8 +102,6 @@ class TypeInferenceServiceTest extends TestCase
 
         $this->assertSame('DECIMAL(15,2)', $result['Balance']);
     }
-
-    // -------------------------------------------------------------------------
 
     /**
      * @param string[] $headers

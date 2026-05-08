@@ -56,7 +56,7 @@ class CsvReaderService
     {
         $headers = fgetcsv($handle, escape: '');
 
-        if ($headers === false || $headers === null) {
+        if ($headers === false) {
             throw new RuntimeException('CSV file is empty or has no header row.');
         }
 
