@@ -5,31 +5,27 @@ declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-use App\Command\CsvToSqlCommand;
 use App\Command\CsvIndexEsCommand;
+use App\Command\CsvToSqlCommand;
 use App\ElasticSearch\CsvIndexerService;
 use App\ElasticSearch\IndexMappingBuilder;
 use App\ElasticSearch\NativeHttpClient;
 use App\Service\CsvReaderService;
-use App\Service\TypeInferenceService;
 use App\Service\SqlGeneratorService;
+use App\Service\TypeInferenceService;
 use Symfony\Component\Console\Application;
 
 $application = new Application('CSV to SQL', '1.0.0');
 
-$indexer = new CsvIndexerService(
-        $_ENV['ES_URL'] ?? 'http://localhost:9200',
-        new NativeHttpClient()
-);
-$csvReader     = new CsvReaderService();
-$typeInference = new TypeInferenceService();
-$sqlGenerator  = new SqlGeneratorService();
-
+$csvReader      = new CsvReaderService();
+$typeInference  = new TypeInferenceService();
+$sqlGenerator   = new SqlGeneratorService();
 $mappingBuilder = new IndexMappingBuilder(dirname(__DIR__) . '/config/elasticsearch');
-$indexer        = new CsvIndexerService($_ENV['ES_URL'] ?? 'http://localhost:9200', $mappingBuilder);
+$httpClient     = new NativeHttpClient();
+$indexer        = new CsvIndexerService($_ENV['ES_URL'] ?? 'http://localhost:9200', $httpClient);
 
 $application->addCommand(new CsvToSqlCommand($csvReader, $typeInference, $sqlGenerator));
-$application->addCommand(new CsvIndexEsCommand($csvReader, $indexer));
+$application->addCommand(new CsvIndexEsCommand($csvReader, $indexer, $mappingBuilder));
 
 try {
     $application->run();

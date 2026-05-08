@@ -22,8 +22,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class CsvIndexEsCommand extends Command
 {
     public function __construct(
-        private readonly CsvReaderService  $csvReader,
-        private readonly CsvIndexerService $indexer,
+        private readonly CsvReaderService    $csvReader,
+        private readonly CsvIndexerService   $indexer,
+        private readonly IndexMappingBuilder $mappingBuilder,
     ) {
         parent::__construct();
     }
@@ -53,9 +54,7 @@ class CsvIndexEsCommand extends Command
         $mappingFile = $input->getOption('mapping');
 
         try {
-            $mapping = (new IndexMappingBuilder(
-                dirname(__DIR__, 2) . '/config/elasticsearch'
-            ))->fromFile($mappingFile);
+            $mapping = $this->mappingBuilder->fromFile($mappingFile);
 
             $csv = $this->csvReader->read($filePath);
 
