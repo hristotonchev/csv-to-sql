@@ -1,0 +1,22 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use App\Command\CsvToSqlCommand;
+use App\Service\CsvReaderService;
+use App\Service\TypeInferenceService;
+use App\Service\SqlGeneratorService;
+use Symfony\Component\Console\Application;
+
+$application = new Application('CSV to SQL', '1.0.0');
+
+$application->add(new CsvToSqlCommand(
+    new CsvReaderService(),
+    new TypeInferenceService(),
+    new SqlGeneratorService()
+));
+
+$application->run();
